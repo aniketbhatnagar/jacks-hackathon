@@ -325,7 +325,7 @@ var Quintus = function Quintus(opts) {
   // If you follow the default convention from the examples, however,
   // you should be able to call `Quintus()` without any options.
   Q.options = {
-    imagePath: "images/",
+    imagePath: "img/",
     audioPath: "audio/",
     dataPath:  "data/",
     audioSupported: [ 'mp3','ogg' ],
