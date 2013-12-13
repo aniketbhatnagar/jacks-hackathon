@@ -23,6 +23,13 @@ body {
     line-height: 1.4;
 }
 
+#quintus_container { width: 1024px !important;
+margin: 0px auto !important;
+position: absolute !important;
+top: 16px !important; } 
+
+#game { width: 1024px !important; height : 632px !important; }
+
 #game-wrapper{
 	margin:10px auto;
 	width:1024px;
