@@ -47,7 +47,7 @@ platform = (function(domain, appId) {
             return tiltWebSocket
         },
         receiveTiltBucketed: function(bucket, callback) {
-            receiveTilt(function(event){
+            this.receiveTilt(function(event){
                 callback({
                     "userId": event.userId,
                     "tiltLR": event.tiltLR % bucket + bucket,
