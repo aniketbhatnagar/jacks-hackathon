@@ -3,6 +3,7 @@ platform = (function(domain, appId) {
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
     var accelerometerPushUrl = "http://" + domain +  "/receivers/hackathon/" + appId + "/accelerometer"
     var accelerometerWebSocketUrl = "ws://" + domain +  "/stream/hackathon/" + appId + "/AccelerometerEvent"
+    var accelerometerWebSocket = null
 
     var ajax = function(url, method, data, callback) {
        $.ajax({
@@ -31,25 +32,34 @@ platform = (function(domain, appId) {
         },
 
         receiveAccelerometer: function(callback) {
-            websocket(accelerometerWebSocketUrl, callback)
+            accelerometerWebSocket = websocket(accelerometerWebSocketUrl, callback)
+            return accelerometerWebSocket
+        },
+        stopAccelerometer: function() {
+            if (accelerometerWebSocket != null) {
+                accelerometerWebSocket.close()
+            }
         },
         receiveAccelerometerChanges: function(callback) {
-            var oldX = null
-            var oldY = null
-            var oldZ = null
+            var oldX = {}
+            var oldY = {}
+            var oldZ = {}
             this.receiveAccelerometer(function(event){
-                if (oldX != null) {
+                if (oldX['userId'] != null) {
                     callback({
                         "userId": event.userId,
-                        "dx": event.x - oldX,
-                        "dy": event.y - oldY,
-                        "dz": event.z - oldZ
+                        "dx": event.x - oldX['userId'],
+                        "dy": event.y - oldY['userId'],
+                        "dz": event.z - oldZ['userId']
                     })
                 }
-                oldX = event.x
-                oldY = event.y
-                oldZ = event.z
+                oldX['userId'] = event.x
+                oldY['userId'] = event.y
+                oldZ['userId'] = event.z
             })
+        },
+        receiveAccelerometerGestures: function(callback) {
+            //var
         }
     }
 
