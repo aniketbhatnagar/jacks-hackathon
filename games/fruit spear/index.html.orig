@@ -33,8 +33,9 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
+<<<<<<< HEAD
         <section id="game-wrapper">
-            <canvas id="spearGame" width="1024" height="632"></canvas>
+            <canvas id="game"></canvas>
 			<div id="leaderboard">
 				<h1><span class="icon balloon"></span><span class="balloon-count">000</span></h1>
 				<div class="stats">
@@ -74,12 +75,21 @@
 			</div>
         </section>
 
+=======
+        <!-- Add your site or application content here -->
+    
+>>>>>>> f0c8cc34594e34dc1b4997866d834a0a59abb618
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
-        <script src="js/players.js"></script>
-        <script src="js/balloons.js"></script>
-        <script src="js/leaderboard.js"></script>
         <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
     </body>
 </html>
