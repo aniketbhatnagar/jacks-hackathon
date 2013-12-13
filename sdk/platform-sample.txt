@@ -6,6 +6,13 @@ sdk.sendAccelerometer({
 	"z": 0.3,
 	"timestamp": 100
 })
+sdk.sendTilt({
+	"userId": "1",
+	"tiltLR": 0.1,
+	"tiltFB": 0.2,
+	"dir": 0.3,
+	"timestamp": 100
+});
 
 
 sdk.receiveAccelerometer(function(event) { console.log(event)})
