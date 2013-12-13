@@ -32,6 +32,24 @@ platform = (function(domain, appId) {
 
         receiveAccelerometer: function(callback) {
             websocket(accelerometerWebSocketUrl, callback)
+        },
+        receiveAccelerometerChanges: function(callback) {
+            var oldX = null
+            var oldY = null
+            var oldZ = null
+            this.receiveAccelerometer(function(event){
+                if (oldX == null) {
+                    oldX = event.x
+                } else {
+                    callback({
+                        "userId": event.userId,
+                        "dx": event.x - oldX,
+                        "dy": event.y - oldY,
+                        "dz": event.z - oldZ
+                    })
+                    oldX = event.x
+                }
+            })
         }
     }
 
