@@ -38,17 +38,17 @@ platform = (function(domain, appId) {
             var oldY = null
             var oldZ = null
             this.receiveAccelerometer(function(event){
-                if (oldX == null) {
-                    oldX = event.x
-                } else {
+                if (oldX != null) {
                     callback({
                         "userId": event.userId,
                         "dx": event.x - oldX,
                         "dy": event.y - oldY,
                         "dz": event.z - oldZ
                     })
-                    oldX = event.x
                 }
+                oldX = event.x
+                oldY = event.y
+                oldZ = event.z
             })
         }
     }
