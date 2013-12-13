@@ -25,7 +25,7 @@ window.FruitSpear = function()
                         this._super(p, {
                             sheet: "player-" + playerColorMap[players.length],
                             x: 10,
-                            y: 440,
+                            y: 680,
                             gravity : 0
                         });
                         this.add("2d, stepControls");
@@ -57,15 +57,14 @@ window.FruitSpear = function()
                 {
                     game = Quintus()
                             .include("Sprites, Scenes, Input, 2D, Touch, UI")
-                            .setup({ width: 400, height: 400 })
+                            .setup({ width: 1024, height: 632 })
                             .controls().touch()
 
                     createPlayer();
                     setupScenes();
 
-                    game.load("spear_sprite.png, spear_sprite.json" /*, level.json, tiles.png"*/ , function() {
+                    game.load("spear_sprite.png, spear_sprite.json" , function() {
                         game.compileSheets("spear_sprite.png","spear_sprite.json");
-                        game.stageScene("game");
                         
 
                         game.stageScene("level1");
