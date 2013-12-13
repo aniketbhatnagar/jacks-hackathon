@@ -7,7 +7,7 @@ var App = App || {};
      */
     App.main = (function () {
         function _main() {
-           var context = this;
+           var context = this, sdk;
 		   
 		   this.players = ["vinod"];
 		   this.balloon = [];
@@ -36,6 +36,22 @@ var App = App || {};
 					App.spearGame.compileSheets("balloons.png","balloons_sprite.json");
 					App.spearGame.stageScene("gameJoin");
 				});
+
+                sdk = platform("10.11.11.36:9000", "1")
+                sdk.receiveAccelerometer(function(event) {
+
+                    if(event.x >= 1)
+                        {
+                            console.log("left");
+                        }
+
+                    if(event.x <= -1)
+                        {
+                            console.log("Right");
+                        }
+
+                })
+				
             };
 			
 			this.setupScenes = function(scene){
