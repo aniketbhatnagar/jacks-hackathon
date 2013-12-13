@@ -10,6 +10,7 @@ var App = App || {};
            var context = this;
 		   
 		   this.players = ["vinod"];
+		   this.balloon = [];
             /**
              * Init call
 			*/
@@ -17,11 +18,14 @@ var App = App || {};
 				App.spearGame = Quintus()
 					.include("Sprites, Scenes, Input, 2D, Touch, UI")
 					.setup('spearGame', { width: 1024, height: 632, downsampleWidth: 1024, downsampleHeight: 768 })
-					.controls().touch()
+					.controls().touch();
 				
 				App.player.createPlayer();
 				
-				context.setupScenes();
+				App.balloons.createBalloons(1);
+				
+				context.setupScenes("gameJoin");
+				
 				
 				App.spearGame.load("spear_sprite.png, spear_sprite.json", function() {
 					App.spearGame.compileSheets("spear_sprite.png","spear_sprite.json");
@@ -30,16 +34,16 @@ var App = App || {};
 				
 				App.spearGame.load("balloons.png, balloons_sprite.json", function() {
 					App.spearGame.compileSheets("balloons.png","balloons_sprite.json");
-					App.spearGame.stageScene("gameStart");
+					App.spearGame.stageScene("gameJoin");
 				});
-				
             };
 			
-			this.setupScenes = function(){
-                // Create a new scene called level 1
-                App.spearGame.scene("gameJoin",function(stage) {
-                    context.players.push(stage.insert(new App.spearGame.Player()));
-                });
+			this.setupScenes = function(scene){
+                // Create a new scene called level 1				
+				App.spearGame.scene("gameJoin",function(stage) {
+					context.players.push(stage.insert(new App.spearGame.Player()));
+					context.balloon.push(stage.insert(new App.spearGame.Balloon()));
+				});
             };
 			
             return this;

@@ -1,48 +1,34 @@
 {
-    "player-red": {
+    "balloon-red": {
         "sx": 0,
         "sy": 0,
         "cols": 1,
-        "tilew": 14,
-        "tileh": 210,
+        "tilew": 80,
+        "tileh": 101,
         "frames": 1
     },
-    "player-yellow": {
+    "balloon-yellow": {
         "sx": 0,
         "sy": 35,
-        "cols": 1,
-        "tilew": 14,
-        "tileh": 210,
-        "frames": 1
+        "cols": 2,
+        "tilew": 80,
+        "tileh": 101,
+        "frames": 2
     },
-    "player-green": {
+    "balloon-green": {
         "sx": 0,
         "sy": 70,
-        "cols": 1,
-        "tilew": 14,
-        "tileh": 210,
-        "frames": 1
+        "cols": 3,
+        "tilew": 80,
+        "tileh": 101,
+        "frames": 3
     },
-    "player-blue": {
+    "balloon-blue": {
         "sx": 0,
         "sy": 105,
-        "cols": 1,
-        "tilew": 14,
-        "tileh": 210,
-        "frames": 1
-    },"player-white": {
-        "sx": 0,
-        "sy": 145,
-        "cols": 1,
-        "tilew": 14,
-        "tileh": 210,
-        "frames": 1
-    },"player-silver": {
-        "sx": 0,
-        "sy": 180,
-        "cols": 1,
-        "tilew": 14,
-        "tileh": 210,
-        "frames": 1
+        "cols": 4,
+        "tilew": 80,
+        "tileh": 101,
+        "frames": 4
     }
 }
