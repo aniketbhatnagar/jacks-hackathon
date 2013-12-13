@@ -1,0 +1,48 @@
+{
+    "player-red": {
+        "sx": 0,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 14,
+        "tileh": 210,
+        "frames": 1
+    },
+    "player-yellow": {
+        "sx": 0,
+        "sy": 35,
+        "cols": 1,
+        "tilew": 14,
+        "tileh": 210,
+        "frames": 1
+    },
+    "player-green": {
+        "sx": 0,
+        "sy": 70,
+        "cols": 1,
+        "tilew": 14,
+        "tileh": 210,
+        "frames": 1
+    },
+    "player-blue": {
+        "sx": 0,
+        "sy": 105,
+        "cols": 1,
+        "tilew": 14,
+        "tileh": 210,
+        "frames": 1
+    },"player-white": {
+        "sx": 0,
+        "sy": 145,
+        "cols": 1,
+        "tilew": 14,
+        "tileh": 210,
+        "frames": 1
+    },"player-silver": {
+        "sx": 0,
+        "sy": 180,
+        "cols": 1,
+        "tilew": 14,
+        "tileh": 210,
+        "frames": 1
+    }
+}
