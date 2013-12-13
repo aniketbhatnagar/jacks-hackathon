@@ -1,0 +1,21 @@
+var sdk = platform("10.11.11.36:9000", "1")
+sdk.sendAccelerometer({
+	"userId": "1",
+	"x": 0.1,
+	"y": 0.2,
+	"z": 0.3,
+	"timestamp": 100
+})
+sdk.sendTilt({
+	"userId": "1",
+	"tiltLR": 0.1,
+	"tiltFB": 0.2,
+	"dir": 0.3,
+	"timestamp": 100
+});
+
+
+sdk.receiveAccelerometer(function(event) { console.log(event)})
+
+sdk.receiveAccelerometerChanges(function(event) { console.log(event)})
+
