@@ -50,9 +50,9 @@ platform = (function(domain, appId) {
             this.receiveTilt(function(event){
                 callback({
                     "userId": event.userId,
-                    "tiltLR": event.tiltLR % bucket + bucket,
-                    "tiltFB": event.tiltFB % bucket + bucket,
-                    "dir": event.dir % bucket + bucket,
+                    "tiltLR": event.tiltLR - event.tiltLR % bucket + bucket,
+                    "tiltFB": event.tiltFB- event.tiltFB % bucket + bucket,
+                    "dir": event.dir - event.dir % bucket + bucket,
                     "timestamp": event.timestamp
                 })
             })
