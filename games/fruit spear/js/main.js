@@ -9,7 +9,8 @@ var App = App || {};
         function _main() {
            var context = this, sdk;
 		   
-			this.players = ["vinod"];
+			this.players = [];
+            this.playersMap = {};
 			this.balloon = [];
 			this.balloonWidth = 80;
 			this.xWidth = 1024;
@@ -41,22 +42,7 @@ var App = App || {};
 					App.spearGame.stageScene("gameJoin");
 				});
 
-                sdk = platform("10.11.11.36:9000", "2")
-                sdk.receiveTilt(function(event) {
-
-                    if(event.tiltLR >= 1)
-                        {
-                            if(event.tiltLR > 90) { event.tiltLR = 90; }
-                            console.log(Math.floor(event.tiltLR));
-                        }
-
-                    if(event.tiltLR <= -1)
-                        {
-                            if(event.tiltLR < -90) { event.tiltLR = -90; }
-                            console.log(-Math.floor(Math.abs(event.tiltLR)));
-                        }
-
-                })
+                
 				
             };
 			
@@ -67,7 +53,39 @@ var App = App || {};
 			this.setupScenes = function(scene){
                 // Create a new scene called level 1				
 				App.spearGame.scene("gameJoin",function(stage) {
-					context.players.push(stage.insert(new App.spearGame.Player()));
+
+                    sdk = platform("10.11.11.36:9000", "2");
+                    sdk.receiveTilt(function(event) {
+
+                        if(!context.playersMap[event.userId])
+                            {
+                                context.playersMap[event.userId] = context.players.length;
+                                context.players.push(stage.insert(new App.spearGame.Player()));
+                            }
+                        else
+                            {
+                                if(event.tiltLR >= 1)
+                                    {
+                                        if(event.tiltLR > 90) { event.tiltLR = 90; }
+                                        console.log(5 * Math.floor(event.tiltLR))
+                                        context.players[context.playersMap[event.userId] - 1].p.x = (parseInt(11 * Math.floor(event.tiltLR), 10));
+                                    }
+
+                                if(event.tiltLR <= -1)
+                                    {
+                                        if(event.tiltLR < -90) { event.tiltLR = -90; }
+                                        context.players[context.playersMap[event.userId] - 1].p.x = (parseInt (11 * -Math.floor(Math.abs(event.tiltLR)), 10));
+                                    }
+
+                                 
+                            }
+
+                        
+
+                    });
+					
+
+
 					var generateBallonWithDelay = function() {
 						var t = setTimeout(function(){
 							generateBalloons(stage);
