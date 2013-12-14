@@ -20,7 +20,7 @@ var App = App || {};
 				$leaderBoardElement.find('h2').html(userObj.userName);
 				$leaderBoardElement.find('h3').html(userObj.pointsEarned);
 				$leaderBoardElement.addClass(userObj.colorName).removeClass('remove');
-				$playerStatsWrap.append($leaderBoardEleClone);
+				$playerStatsWrap.append($leaderBoardElement);
 			};
 			
 			this.updateLeaderBoard = function(userObj){
