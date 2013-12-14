@@ -3,12 +3,18 @@ platform = (function(domain, appId) {
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
     var accelerometerPushUrl = "http://" + domain +  "/receivers/hackathon/" + appId + "/accelerometer"
     var accelerometerWebSocketUrl = "ws://" + domain +  "/stream/hackathon/" + appId + "/AccelerometerEvent"
+    var tilPushUrl = "http://" + domain +  "/receivers/hackathon/" + appId + "/tilt"
+    var tiltWebSocketUrl = "ws://" + domain +  "/stream/hackathon/" + appId + "/TiltEvent"
     var accelerometerWebSocket = null
+    var tiltWebSocket = null
+
+    var usersSeen = {}
+    var userJoinCallbacks = new Array();
 
     var ajax = function(url, method, data, callback) {
        $.ajax({
           type: method,
-          url: accelerometerPushUrl,
+          url: url,
           contentType: "text/json",
           data: JSON.stringify(data),
 		  error: function(jqXHR, textStatus, errorThrown) {
@@ -21,6 +27,12 @@ platform = (function(domain, appId) {
         var socket = new WS(url)
         socket.onmessage = function(socketEvent) {
             var event = JSON.parse(socketEvent.data)
+            if (usersSeen[event.userId] == null) {
+                for (i=0; i < userJoinCallbacks.length; i++) {
+                    userJoinCallbacks[i](event.userId)
+                }
+                usersSeen[event.userId] = {}
+            }
             callback(event)
         }
         return socket
@@ -31,9 +43,33 @@ platform = (function(domain, appId) {
             ajax(accelerometerPushUrl, "PUT", data, callback)
         },
 
+        sendTilt: function(data, callback) {
+            ajax(tilPushUrl, "PUT", data, callback)
+        },
+
         receiveAccelerometer: function(callback) {
             accelerometerWebSocket = websocket(accelerometerWebSocketUrl, callback)
             return accelerometerWebSocket
+        },
+        receiveTilt: function(callback) {
+            tiltWebSocket = websocket(tiltWebSocketUrl, callback)
+            return tiltWebSocket
+        },
+        receiveTiltBucketed: function(bucket, callback) {
+            this.receiveTilt(function(event){
+                callback({
+                    "userId": event.userId,
+                    "tiltLR": event.tiltLR - event.tiltLR % bucket,
+                    "tiltFB": event.tiltFB- event.tiltFB % bucket,
+                    "dir": event.dir - event.dir % bucket,
+                    "timestamp": event.timestamp
+                })
+            })
+        },
+        stopTilt: function() {
+            if (tiltWebSocket != null) {
+                tiltWebSocket.close()
+            }
         },
         stopAccelerometer: function() {
             if (accelerometerWebSocket != null) {
@@ -45,21 +81,21 @@ platform = (function(domain, appId) {
             var oldY = {}
             var oldZ = {}
             this.receiveAccelerometer(function(event){
-                if (oldX['userId'] != null) {
+                if (oldX[event.userId] != null) {
                     callback({
                         "userId": event.userId,
-                        "dx": event.x - oldX['userId'],
-                        "dy": event.y - oldY['userId'],
-                        "dz": event.z - oldZ['userId']
+                        "dx": event.x - oldX[event.userId],
+                        "dy": event.y - oldY[event.userId],
+                        "dz": event.z - oldZ[event.userId]
                     })
                 }
-                oldX['userId'] = event.x
-                oldY['userId'] = event.y
-                oldZ['userId'] = event.z
+                oldX[event.userId] = event.x
+                oldY[event.userId] = event.y
+                oldZ[event.userId] = event.z
             })
         },
-        receiveAccelerometerGestures: function(callback) {
-            //var
+        registerUserJoins: function(callback) {
+            userJoinCallbacks.push(callback)
         }
     }
 
