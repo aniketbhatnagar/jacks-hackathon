@@ -55,16 +55,17 @@ var App = App || {};
 				App.spearGame.scene("gameJoin",function(stage) {
 
                     sdk = platform("10.11.11.36:9000", "2");
+
+                    sdk.registerUserJoins(function(username) {
+                        console.log("player " + username + " joined");
+                        App.player.createPlayer(username)
+                        context.playersMap[username] = context.players.length;
+                        context.players.push(stage.insert(new App.spearGame.Player()));
+                    });
+
                     sdk.receiveTilt(function(event) {
 
-                        if(!context.playersMap[event.userId])
-                            {
-                                context.playersMap[event.userId] = context.players.length;
-                                context.players.push(stage.insert(new App.spearGame.Player()));
-                            }
-                        else
-                            {
-                                if(event.tiltLR >= 1)
+                        if(event.tiltLR >= 1)
                                     {
                                         if(event.tiltLR > 90) { event.tiltLR = 90; }
                                         console.log(5 * Math.floor(event.tiltLR))
@@ -77,19 +78,10 @@ var App = App || {};
                                         context.players[context.playersMap[event.userId] - 1].p.x = (parseInt (11 * -Math.floor(Math.abs(event.tiltLR)), 10));
                                     }
 
-                                 
-                            }
-
-                        
-
                     });
 					
 
-					sdk.registerUserJoins(function(username) {
-						console.log("player " + username + " joined");
-						App.player.createPlayer(username)
-						context.players.push(stage.insert(new App.spearGame.Player()));
-					});
+					
 
 					var generateBallonWithDelay = function() {
 						var t = setTimeout(function(){
