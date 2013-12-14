@@ -27,8 +27,8 @@ var App = App || {};
 						
 						this.on("hit.sprite", function(collision) {
 							if(collision.obj.isA("Player")) {
-								collision.obj.pointsEarned += this.hitPoints;
-								App.leaderboard.updateLeaderBoard(collision.obj);
+								collision.obj.p.pointsEarned += this.p.hitPoints;
+								App.leaderboard.updateLeaderBoard(collision.obj.p);
 								this.destroy();
 							}
 						});

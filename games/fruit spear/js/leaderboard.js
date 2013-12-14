@@ -13,19 +13,15 @@ var App = App || {};
 			this.createLeaderBoard = function(userObj){
 				$leaderBoard = $('#leaderboard');
 				
-				var $playerStatsWrap = $leaderBoard.find('.player-stats'),
-					$leaderBoardElement = $playerStatsWrap.find('.player-stats li.player').removeClass();
-				
-				$leaderBoardElement.addClass(userObj.userId);
+				var $leaderBoardElement = $leaderBoard.find('.player-stats li.player.'+ userObj.userId).removeClass('hidden');
+				$leaderBoardElement.attr("id", userObj.userId);
 				$leaderBoardElement.find('h2').html(userObj.userName);
 				$leaderBoardElement.find('h3').html(userObj.pointsEarned);
 				$leaderBoardElement.addClass(userObj.colorName).removeClass('remove');
-				$playerStatsWrap.append($leaderBoardElement);
 			};
 			
 			this.updateLeaderBoard = function(userObj){
-				console.log(userObj);
-				//$leaderBoard.find('.'+ userObj.userId).find('h3').html(userObj.pointsEarned);
+				$leaderBoard.find('.'+ userObj.userId).find('h3').html(userObj.pointsEarned);
 			};
 			
             return this;

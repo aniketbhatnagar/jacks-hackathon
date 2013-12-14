@@ -21,7 +21,7 @@ var App = App || {};
 							pointsEarned: 0,
                             gravity : 0,
 							userName: name,
-							userId: name + userCount++,
+							userId: "user" + userCount++,
 							colorName: App.player.playerColorMap[App.main.players.length]
                         });
                         this.add("2d, stepControls");

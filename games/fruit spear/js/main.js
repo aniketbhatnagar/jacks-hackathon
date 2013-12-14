@@ -62,7 +62,7 @@ var App = App || {};
                         context.playersMap[username] = context.players.length;
 						var userObj = stage.insert(new App.spearGame.Player());
 						context.players.push(userObj);
-						App.leaderboard.createLeaderBoard(userObj);
+						App.leaderboard.createLeaderBoard(userObj.p);
                     });
 
                     sdk.receiveTilt(function(event) {
