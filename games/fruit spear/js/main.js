@@ -14,6 +14,8 @@ var App = App || {};
 			this.balloon = [];
 			this.balloonWidth = 80;
 			this.xWidth = 1024;
+			this.gameTime = 60;
+			this.gameLoop = null;
             /**
              * Init call
 			*/
@@ -22,15 +24,12 @@ var App = App || {};
 					.include("Sprites, Scenes, 2D, UI")
 					.setup('spearGame', { width: 1024, height: 632, downsampleWidth: 1024, downsampleHeight: 768 });
 				
-				
-				
 				App.balloons.createBalloons(0);
 				App.balloons.createBalloons(1);
 				App.balloons.createBalloons(2);
 				App.balloons.createBalloons(3);
 				
 				context.setupScenes("gameJoin");
-				
 				
 				App.spearGame.load("spear_sprite.png, spear_sprite.json", function() {
 					App.spearGame.compileSheets("spear_sprite.png","spear_sprite.json");
@@ -41,8 +40,6 @@ var App = App || {};
 					App.spearGame.compileSheets("balloons.png","balloons_sprite.json");
 					App.spearGame.stageScene("gameJoin");
 				});
-
-                
 				
             };
 			
@@ -80,17 +77,20 @@ var App = App || {};
                                     }
 
                     });
-					
-
-					
 
 					var generateBallonWithDelay = function() {
-						var t = setTimeout(function(){
+						App.main.gameLoop = setTimeout(function(){
 							generateBalloons(stage);
 							generateBallonWithDelay();
 						}, context.random(200, 1000));
 					};
 					generateBallonWithDelay();
+					
+					setTimeout(function(){
+						clearTimeout(App.main.gameLoop);
+						App.leaderboard.showFinalResults();
+						App.spearGame.clearStage("gameJoin");
+					}, App.main.gameTime * 1000);
 				});
             };
 			

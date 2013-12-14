@@ -12,7 +12,6 @@ var App = App || {};
 				
 			this.ballonMap = ["blue", "red", "green", "yellow"];
 			
-			
 			this.createBalloons = function(index){
                 // You can create a sub-class by extending the Q.Sprite class to create Q.Player
 				App.spearGame.Sprite.extend("Balloon_" + context.ballonMap[index], {

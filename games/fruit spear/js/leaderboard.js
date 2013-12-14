@@ -21,7 +21,22 @@ var App = App || {};
 			};
 			
 			this.updateLeaderBoard = function(userObj){
-				$leaderBoard.find('.'+ userObj.userId).find('h3').html(userObj.pointsEarned);
+				$('#leaderboard').find('.'+ userObj.userId).find('h3').html(userObj.pointsEarned);
+			};
+			
+			this.showFinalResults = function(){
+				var userLen = App.main.players.length;
+				if(userLen == 1){
+					$('#leaderboard').find('h1 .balloon-count').html("Your Score: "+ App.main.players[0].p.pointsEarned);
+				} else if(userLen >= 1){
+					var winner = App.main.players[0];
+					for(var i = 1; i < userLen; i++){
+						if (winner.p.pointsEarned < App.main.players[i].p.pointsEarned) {
+							winner = App.main.players[i];
+						}
+					}
+					$('#leaderboard').find('h1 .balloon-count').html("Winner's Score: "+ winner.p.pointsEarned);
+				}
 			};
 			
             return this;
