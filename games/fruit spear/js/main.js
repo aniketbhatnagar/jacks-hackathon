@@ -77,7 +77,7 @@ var App = App || {};
             };
 			
 			var generateBalloons = function(stage){
-				context.balloon.push(stage.insert(new App.spearGame["Balloon_" + App.balloons.ballonMap[context.random(0,3)]]()));
+				stage.insert(new App.spearGame["Balloon_" + App.balloons.ballonMap[context.random(0,3)]]());
 			};
 			
             return this;
