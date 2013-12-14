@@ -8,6 +8,9 @@ platform = (function(domain, appId) {
     var accelerometerWebSocket = null
     var tiltWebSocket = null
 
+    var usersSeen = {}
+    var userJoinCallbacks = new Array();
+
     var ajax = function(url, method, data, callback) {
        $.ajax({
           type: method,
@@ -24,6 +27,12 @@ platform = (function(domain, appId) {
         var socket = new WS(url)
         socket.onmessage = function(socketEvent) {
             var event = JSON.parse(socketEvent.data)
+            if (usersSeen[event.userId] == null) {
+                for (i=0; i < userJoinCallbacks.length; i++) {
+                    userJoinCallbacks[i](event.userId)
+                }
+                usersSeen[event.userId] = {}
+            }
             callback(event)
         }
         return socket
@@ -85,8 +94,8 @@ platform = (function(domain, appId) {
                 oldZ[event.userId] = event.z
             })
         },
-        receiveAccelerometerGestures: function(callback) {
-
+        registerUserJoins: function(callback) {
+            userJoinCallbacks.push(callback)
         }
     }
 

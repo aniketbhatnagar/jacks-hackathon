@@ -7,28 +7,60 @@
         "tileh": 101,
         "frames": 1
     },
+	"balloon-red-hover": {
+        "sx": 375,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 48,
+        "tileh": 101,
+        "frames": 1
+    },
     "balloon-yellow": {
         "sx": 720,
         "sy": 0,
-        "cols": 2,
+        "cols": 1,
         "tilew": 80,
         "tileh": 101,
-        "frames": 2
+        "frames": 1
+    },
+	"balloon-yellow-hover": {
+        "sx": 859,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 48,
+        "tileh": 101,
+        "frames": 1
     },
     "balloon-green": {
         "sx": 480,
         "sy": 0,
-        "cols": 3,
+        "cols": 1,
         "tilew": 80,
         "tileh": 101,
-        "frames": 3
+        "frames": 1
+    },
+	"balloon-green-hover": {
+        "sx": 623,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 40,
+        "tileh": 101,
+        "frames": 1
     },
     "balloon-blue": {
         "sx": 0,
         "sy": 0,
-        "cols": 4,
+        "cols": 1,
         "tilew": 80,
         "tileh": 101,
-        "frames": 4
+        "frames": 1
+    },
+    "balloon-blue-hover": {
+        "sx": 140,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 40,
+        "tileh": 101,
+        "frames": 1
     }
 }

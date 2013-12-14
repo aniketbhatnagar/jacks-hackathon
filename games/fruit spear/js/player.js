@@ -9,7 +9,7 @@ var playerColorMap = ["red", "yellow", "green", "blue", "white", "silver"],
                     this._super(p, {
                         sheet: "player-" + playerColorMap[players.length],
                         x: 100,
-                        y: 440,
+                        y: 600,
                         gravity : 0
                     });
                     this.add("2d, stepControls");

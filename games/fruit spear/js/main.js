@@ -22,7 +22,7 @@ var App = App || {};
 					.include("Sprites, Scenes, 2D, UI")
 					.setup('spearGame', { width: 1024, height: 632, downsampleWidth: 1024, downsampleHeight: 768 });
 				
-				App.player.createPlayer();
+				
 				
 				App.balloons.createBalloons(0);
 				App.balloons.createBalloons(1);
@@ -85,6 +85,11 @@ var App = App || {};
                     });
 					
 
+					sdk.registerUserJoins(function(username) {
+						console.log("player " + username + " joined");
+						App.player.createPlayer(username)
+						context.players.push(stage.insert(new App.spearGame.Player()));
+					});
 
 					var generateBallonWithDelay = function() {
 						var t = setTimeout(function(){
@@ -97,7 +102,7 @@ var App = App || {};
             };
 			
 			var generateBalloons = function(stage){
-				context.balloon.push(stage.insert(new App.spearGame["Balloon_" + App.balloons.ballonMap[context.random(0,3)]]()));
+				stage.insert(new App.spearGame["Balloon_" + App.balloons.ballonMap[context.random(0,3)]]());
 			};
 			
             return this;

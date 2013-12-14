@@ -8,38 +8,40 @@
         "frames": 1
     },
     "player-yellow": {
-        "sx": 0,
-        "sy": 35,
+        "sx": 35,
+        "sy": 0,
         "cols": 1,
         "tilew": 14,
         "tileh": 210,
         "frames": 1
     },
     "player-green": {
-        "sx": 0,
-        "sy": 70,
+        "sx": 70,
+        "sy": 0,
         "cols": 1,
         "tilew": 14,
         "tileh": 210,
         "frames": 1
     },
     "player-blue": {
-        "sx": 0,
-        "sy": 105,
+        "sx": 105,
+        "sy": 0,
         "cols": 1,
         "tilew": 14,
         "tileh": 210,
         "frames": 1
-    },"player-white": {
-        "sx": 0,
-        "sy": 145,
+    },
+	"player-white": {
+        "sx": 145,
+        "sy": 0,
         "cols": 1,
         "tilew": 14,
         "tileh": 210,
         "frames": 1
-    },"player-silver": {
-        "sx": 0,
-        "sy": 180,
+    },
+	"player-silver": {
+        "sx": 180,
+        "sy": 0,
         "cols": 1,
         "tilew": 14,
         "tileh": 210,
