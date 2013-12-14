@@ -9,7 +9,7 @@ var App = App || {};
         function _main() {
            var context = this, sdk;
 		   
-			this.players = ["vinod"];
+			this.players = [];
 			this.balloon = [];
 			this.balloonWidth = 80;
 			this.xWidth = 1024;
@@ -70,7 +70,9 @@ var App = App || {};
 					sdk.registerUserJoins(function(username) {
 						console.log("player " + username + " joined");
 						App.player.createPlayer(username)
-						context.players.push(stage.insert(new App.spearGame.Player()));
+						var userObj = stage.insert(new App.spearGame.Player());
+						context.players.push(userObj);
+						App.leaderboard.createLeaderBoard(userObj);
 					});
 
 					var generateBallonWithDelay = function() {

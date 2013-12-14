@@ -11,7 +11,6 @@ var App = App || {};
             this.playerColorMap = ["red", "yellow", "green", "blue", "white", "silver"];
 			
 			this.createPlayer = function(name){
-				
                 // You can create a sub-class by extending the Q.Sprite class to create Q.Player
                  App.spearGame.Sprite.extend("Player",{
                     init: function(p) {

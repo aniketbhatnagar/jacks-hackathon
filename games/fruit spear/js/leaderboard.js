@@ -14,17 +14,18 @@ var App = App || {};
 				$leaderBoard = $('#leaderboard');
 				
 				var $playerStatsWrap = $leaderBoard.find('.player-stats'),
-					$leaderBoardEleClone = $playerStatsWrap.find('.player-stats li.player').clone();
+					$leaderBoardElement = $playerStatsWrap.find('.player-stats li.player').removeClass();
 				
-				$leaderBoardEleClone.addClass(userObj.userId);
-				$leaderBoardEleClone.find('h2').html(userObj.userName);
-				$leaderBoardEleClone.find('h3').html(userObj.pointsEarned);
-				$leaderBoardEleClone.addClass(userObj.colorName).removeClass('remove');
+				$leaderBoardElement.addClass(userObj.userId);
+				$leaderBoardElement.find('h2').html(userObj.userName);
+				$leaderBoardElement.find('h3').html(userObj.pointsEarned);
+				$leaderBoardElement.addClass(userObj.colorName).removeClass('remove');
 				$playerStatsWrap.append($leaderBoardEleClone);
 			};
 			
 			this.updateLeaderBoard = function(userObj){
-				$leaderBoard.find('.'+ userObj).find('h3').html(userObj.pointsEarned);
+				console.log(userObj);
+				//$leaderBoard.find('.'+ userObj.userId).find('h3').html(userObj.pointsEarned);
 			};
 			
             return this;
