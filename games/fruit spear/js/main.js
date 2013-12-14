@@ -9,20 +9,24 @@ var App = App || {};
         function _main() {
            var context = this, sdk;
 		   
-		   this.players = ["vinod"];
-		   this.balloon = [];
+			this.players = ["vinod"];
+			this.balloon = [];
+			this.balloonWidth = 80;
+			this.xWidth = 1024;
             /**
              * Init call
 			*/
             this.init = function () {
 				App.spearGame = Quintus()
-					.include("Sprites, Scenes, Input, 2D, Touch, UI")
-					.setup('spearGame', { width: 1024, height: 632, downsampleWidth: 1024, downsampleHeight: 768 })
-					.controls().touch();
+					.include("Sprites, Scenes, 2D, UI")
+					.setup('spearGame', { width: 1024, height: 632, downsampleWidth: 1024, downsampleHeight: 768 });
 				
 				App.player.createPlayer();
 				
+				App.balloons.createBalloons(0);
 				App.balloons.createBalloons(1);
+				App.balloons.createBalloons(2);
+				App.balloons.createBalloons(3);
 				
 				context.setupScenes("gameJoin");
 				
@@ -54,13 +58,27 @@ var App = App || {};
 				
             };
 			
+			this.random = function(min, max) {
+				return parseInt(min + Math.random() * (max - min), 10);
+			};
+			
 			this.setupScenes = function(scene){
                 // Create a new scene called level 1				
 				App.spearGame.scene("gameJoin",function(stage) {
 					context.players.push(stage.insert(new App.spearGame.Player()));
-					context.balloon.push(stage.insert(new App.spearGame.Balloon()));
+					var generateBallonWithDelay = function() {
+						var t = setTimeout(function(){
+							generateBalloons(stage);
+							generateBallonWithDelay();
+						}, context.random(200, 1000));
+					};
+					generateBallonWithDelay();
 				});
             };
+			
+			var generateBalloons = function(stage){
+				context.balloon.push(stage.insert(new App.spearGame["Balloon_" + App.balloons.ballonMap[context.random(0,3)]]()));
+			};
 			
             return this;
         }

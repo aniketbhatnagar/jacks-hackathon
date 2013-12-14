@@ -1,6 +1,6 @@
 {
     "balloon-red": {
-        "sx": 0,
+        "sx": 240,
         "sy": 0,
         "cols": 1,
         "tilew": 80,
@@ -8,16 +8,16 @@
         "frames": 1
     },
     "balloon-yellow": {
-        "sx": 0,
-        "sy": 35,
+        "sx": 720,
+        "sy": 0,
         "cols": 2,
         "tilew": 80,
         "tileh": 101,
         "frames": 2
     },
     "balloon-green": {
-        "sx": 0,
-        "sy": 70,
+        "sx": 480,
+        "sy": 0,
         "cols": 3,
         "tilew": 80,
         "tileh": 101,
@@ -25,7 +25,7 @@
     },
     "balloon-blue": {
         "sx": 0,
-        "sy": 105,
+        "sy": 0,
         "cols": 4,
         "tilew": 80,
         "tileh": 101,
