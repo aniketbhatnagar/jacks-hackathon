@@ -5,8 +5,11 @@ platform = (function(domain, appId) {
     var accelerometerWebSocketUrl = "ws://" + domain +  "/stream/hackathon/" + appId + "/AccelerometerEvent"
     var tilPushUrl = "http://" + domain +  "/receivers/hackathon/" + appId + "/tilt"
     var tiltWebSocketUrl = "ws://" + domain +  "/stream/hackathon/" + appId + "/TiltEvent"
+    var userJoinedPushUrl = "http://" + domain +  "/receivers/hackathon/" + appId + "/sendUserJoined"
+    var userJoinedWebSocketUrl = "ws://" + domain +  "/stream/hackathon/" + appId + "/UserJoined"
     var accelerometerWebSocket = null
     var tiltWebSocket = null
+    var userJoinedWebSocket = null
 
     var usersSeen = {}
     var userJoinCallbacks = new Array();
@@ -28,9 +31,6 @@ platform = (function(domain, appId) {
         socket.onmessage = function(socketEvent) {
             var event = JSON.parse(socketEvent.data)
             if (usersSeen[event.userId] == null) {
-                for (i=0; i < userJoinCallbacks.length; i++) {
-                    userJoinCallbacks[i](event.userId)
-                }
                 usersSeen[event.userId] = {}
             }
             callback(event)
@@ -45,6 +45,10 @@ platform = (function(domain, appId) {
 
         sendTilt: function(data, callback) {
             ajax(tilPushUrl, "PUT", data, callback)
+        },
+
+        sendUserJoined: function(data, callback) {
+            ajax(userJoinedPushUrl, "PUT", data, callback)
         },
 
         receiveAccelerometer: function(callback) {
@@ -95,7 +99,9 @@ platform = (function(domain, appId) {
             })
         },
         registerUserJoins: function(callback) {
+            userJoinedWebSocket = websocket(userJoinedWebSocketUrl, callback)
             userJoinCallbacks.push(callback)
+            return accelerometerWebSocket
         }
     }
 
