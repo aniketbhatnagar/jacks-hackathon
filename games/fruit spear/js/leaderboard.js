@@ -13,8 +13,7 @@ var App = App || {};
 			this.createLeaderBoard = function(userObj){
 				$leaderBoard = $('#leaderboard');
 				
-				var $leaderBoardElement = $leaderBoard.find('.player-stats li.player.'+ userObj.userId).removeClass('hidden');
-				$leaderBoardElement.attr("id", userObj.userId);
+				var $leaderBoardElement = $leaderBoard.find('.player-stats li.'+ userObj.userId).removeClass('hidden');
 				$leaderBoardElement.find('h2').html(userObj.userName);
 				$leaderBoardElement.find('h3').html(userObj.pointsEarned);
 				$leaderBoardElement.addClass(userObj.colorName).removeClass('remove');
