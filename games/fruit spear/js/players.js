@@ -7,10 +7,11 @@ var App = App || {};
      */
     App.player = (function () {
         function _players() {
-			var context = this;
+			var context = this, userCount = 0;
             this.playerColorMap = ["red", "yellow", "green", "blue", "white", "silver"];
 			
 			this.createPlayer = function(name){
+				
                 // You can create a sub-class by extending the Q.Sprite class to create Q.Player
                  App.spearGame.Sprite.extend("Player",{
                     init: function(p) {
@@ -19,7 +20,10 @@ var App = App || {};
                             x: App.main.random(App.main.balloonWidth, App.main.xWidth - App.main.balloonWidth),
                             y: 600,
 							pointsEarned: 0,
-                            gravity : 0
+                            gravity : 0,
+							userName: name,
+							userId: name + userCount++,
+							colorName: App.player.playerColorMap[App.main.players.length]
                         });
                         this.add("2d, stepControls");
                         // Add in pre-made components to get up and running quickly

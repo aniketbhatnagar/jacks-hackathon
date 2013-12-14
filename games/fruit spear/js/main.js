@@ -21,7 +21,7 @@ var App = App || {};
 					.include("Sprites, Scenes, 2D, UI")
 					.setup('spearGame', { width: 1024, height: 632, downsampleWidth: 1024, downsampleHeight: 768 });
 				
-				App.player.createPlayer();
+				
 				
 				App.balloons.createBalloons(0);
 				App.balloons.createBalloons(1);
@@ -67,7 +67,12 @@ var App = App || {};
 			this.setupScenes = function(scene){
                 // Create a new scene called level 1				
 				App.spearGame.scene("gameJoin",function(stage) {
-					context.players.push(stage.insert(new App.spearGame.Player()));
+					sdk.registerUserJoins(function(username) {
+						console.log("player " + username + " joined");
+						App.player.createPlayer(username)
+						context.players.push(stage.insert(new App.spearGame.Player()));
+					});
+
 					var generateBallonWithDelay = function() {
 						var t = setTimeout(function(){
 							generateBalloons(stage);
