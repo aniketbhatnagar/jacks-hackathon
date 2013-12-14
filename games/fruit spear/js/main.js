@@ -14,7 +14,7 @@ var App = App || {};
 			this.balloon = [];
 			this.balloonWidth = 80;
 			this.xWidth = 1024;
-			this.gameTime = 60;
+			this.gameTime = 300;
 			this.gameLoop = null;
             /**
              * Init call
@@ -31,15 +31,12 @@ var App = App || {};
 				
 				context.setupScenes("gameJoin");
 				
-				App.spearGame.load("spear_sprite.png, spear_sprite.json", function() {
+				App.spearGame.load("spear_sprite.png, spear_sprite.json, balloons.png, balloons_sprite.json", function() {
 					App.spearGame.compileSheets("spear_sprite.png","spear_sprite.json");
-					App.spearGame.stageScene("gameJoin");
-				});
-				
-				App.spearGame.load("balloons.png, balloons_sprite.json", function() {
 					App.spearGame.compileSheets("balloons.png","balloons_sprite.json");
 					App.spearGame.stageScene("gameJoin");
 				});
+				
 				
             };
 			
@@ -53,28 +50,28 @@ var App = App || {};
 
                     sdk = platform("10.11.11.36:9000", "2");
 
-                    sdk.registerUserJoins(function(username) {
-                        console.log("player " + username + " joined");
-                        App.player.createPlayer(username)
-                        context.playersMap[username] = context.players.length;
+                    sdk.registerUserJoins(function(user) {
+						var userId = user.userId
+                        console.log("player " + userId + " joined");
+                        App.player.createPlayer(userId)
 						var userObj = stage.insert(new App.spearGame.Player());
+						context.playersMap[userId] = userObj;
 						context.players.push(userObj);
 						App.leaderboard.createLeaderBoard(userObj.p);
                     });
 
-                    sdk.receiveTilt(function(event) {
-
-                        if(event.tiltLR >= 1 && context.players[context.playersMap[event.userId] - 1] && (parseInt(11 * Math.floor(event.tiltLR), 10) <= 1020))
-                                    {
-                                        if(event.tiltLR > 90) { event.tiltLR = 90; }
-                                        context.players[context.playersMap[event.userId] - 1].p.x = (parseInt(11 * Math.floor(event.tiltLR), 10));
-                                    }
-
-                                if(event.tiltLR <= -1 && context.players[context.playersMap[event.userId] - 1] && (parseInt(11 * -Math.floor(Math.abs(event.tiltLR)), 10) > 0))
-                                    {
-                                        if(event.tiltLR < -90) { event.tiltLR = -90; }
-                                        context.players[context.playersMap[event.userId] - 1].p.x = (parseInt (11 * -Math.floor(Math.abs(event.tiltLR)), 10));
-                                    }
+                    sdk.receiveTiltBucketed(5, function(event) {
+					
+						var tiltLR = event.tiltLR + 90
+						if (tiltLR < 0) tiltLR = 0
+						if (tiltLR > 180) tiltLR = 180
+						var player = context.playersMap[event.userId]
+						if (typeof player == 'undefined') {
+							console.log("player not found");
+							return
+						}
+						var newX = (parseInt(11 * Math.floor(tiltLR), 10))
+						player.p.x  = newX;
 
                     });
 
