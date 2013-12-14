@@ -16,10 +16,12 @@ var App = App || {};
                     init: function(p) {
                         this._super(p, {
                             sheet: "player-" + App.player.playerColorMap[App.main.players.length],
-                            x: App.main.random(14, 1010),
+                            x: App.main.random(App.main.balloonWidth, App.main.xWidth - App.main.balloonWidth),
                             y: 600,
+							pointsEarned: 0,
                             gravity : 0,
-							userName: name
+							userName: name,
+							colorName: App.player.playerColorMap[App.main.players.length]
                         });
                         this.add("2d, stepControls");
                         // Add in pre-made components to get up and running quickly

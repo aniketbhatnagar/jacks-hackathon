@@ -41,17 +41,19 @@ var App = App || {};
 					App.spearGame.stageScene("gameJoin");
 				});
 
-                sdk = platform("10.11.11.36:9000", "1")
-                sdk.receiveAccelerometer(function(event) {
+                sdk = platform("10.11.11.36:9000", "2")
+                sdk.receiveTilt(function(event) {
 
-                    if(event.x >= 1)
+                    if(event.tiltLR >= 1)
                         {
-                            console.log("left");
+                            if(event.tiltLR > 90) { event.tiltLR = 90; }
+                            console.log(Math.floor(event.tiltLR));
                         }
 
-                    if(event.x <= -1)
+                    if(event.tiltLR <= -1)
                         {
-                            console.log("Right");
+                            if(event.tiltLR < -90) { event.tiltLR = -90; }
+                            console.log(-Math.floor(Math.abs(event.tiltLR)));
                         }
 
                 })
@@ -69,7 +71,7 @@ var App = App || {};
 						App.player.createPlayer(username)
 						context.players.push(stage.insert(new App.spearGame.Player()));
 					});
-					// context.players.push(stage.insert(new App.spearGame.Player()));
+
 					var generateBallonWithDelay = function() {
 						var t = setTimeout(function(){
 							generateBalloons(stage);
@@ -81,7 +83,7 @@ var App = App || {};
             };
 			
 			var generateBalloons = function(stage){
-				context.balloon.push(stage.insert(new App.spearGame["Balloon_" + App.balloons.ballonMap[context.random(0,3)]]()));
+				stage.insert(new App.spearGame["Balloon_" + App.balloons.ballonMap[context.random(0,3)]]());
 			};
 			
             return this;
