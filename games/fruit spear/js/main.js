@@ -67,14 +67,13 @@ var App = App || {};
 
                     sdk.receiveTilt(function(event) {
 
-                        if(event.tiltLR >= 1)
+                        if(event.tiltLR >= 1 && context.players[context.playersMap[event.userId] - 1] && (parseInt(11 * Math.floor(event.tiltLR), 10) <= 1020))
                                     {
                                         if(event.tiltLR > 90) { event.tiltLR = 90; }
-                                        console.log(5 * Math.floor(event.tiltLR))
                                         context.players[context.playersMap[event.userId] - 1].p.x = (parseInt(11 * Math.floor(event.tiltLR), 10));
                                     }
 
-                                if(event.tiltLR <= -1)
+                                if(event.tiltLR <= -1 && context.players[context.playersMap[event.userId] - 1] && (parseInt(11 * -Math.floor(Math.abs(event.tiltLR)), 10) > 0))
                                     {
                                         if(event.tiltLR < -90) { event.tiltLR = -90; }
                                         context.players[context.playersMap[event.userId] - 1].p.x = (parseInt (11 * -Math.floor(Math.abs(event.tiltLR)), 10));
