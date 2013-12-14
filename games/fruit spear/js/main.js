@@ -68,6 +68,7 @@ var App = App || {};
                 // Create a new scene called level 1				
 				App.spearGame.scene("gameJoin",function(stage) {
 					sdk.registerUserJoins(function(username) {
+						console.log("player " + username + " joined");
 						App.player.createPlayer(username)
 						context.players.push(stage.insert(new App.spearGame.Player()));
 					});
