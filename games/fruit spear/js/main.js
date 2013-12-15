@@ -71,8 +71,7 @@ var App = App || {};
 							return
 						}
 						var newX = (parseInt(11 * Math.floor(tiltLR), 10))
-						player.p.x  = newX;
-
+						player.p.newX = newX
                     });
 
 					var generateBallonWithDelay = function() {

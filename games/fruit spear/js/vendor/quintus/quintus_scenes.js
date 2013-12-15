@@ -593,8 +593,10 @@ Quintus.Scenes = function(Q) {
           for(var ix=gridX1; ix<=gridX2; ix++) {
             if((gridBlock = gridRow[ix])) {
               for(var id in gridBlock) {
-                this.index[id].mark = time;
-                if(this.index[id].container) { this.index[id].container.mark = time; }
+				if (this.index[id] ) {
+					this.index[id].mark = time;
+					if(this.index[id].container) { this.index[id].container.mark = time; }
+				}
               }
             }
           }

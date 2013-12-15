@@ -26,7 +26,15 @@ var App = App || {};
                         });
                         this.add("2d, stepControls");
                         // Add in pre-made components to get up and running quickly
-                    }					
+                    },
+					update: function(dt) {
+					  this.trigger('prestep',dt);
+					  if(this.step) { this.step(dt); }
+					  if (this.p.newX) this.p.x = this.p.newX
+					  this.trigger('step',dt);
+					  this.refreshMatrix();
+					  App.spearGame._invoke(this.children,"frame",dt);
+					}
                 });
             };
 			
