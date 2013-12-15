@@ -46,7 +46,7 @@ var App = App || {};
 			
 			this.setupScenes = function(scene){
                 // Create a new scene called level 1				
-				App.spearGame.scene("gameJoin",function(stage) {
+				App.spearGame.scene("gameJoin", function(stage) {
 
                     sdk = platform("10.11.11.36:9000", "2");
 
